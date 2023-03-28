@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Sample_ListenerFilter" Id="{c594ccb3-35a8-4c94-8f8b-8aeefb72acbb}" SpecialFunc="None">
+    <Declaration><![CDATA[// sample about how to set a filter for an event listener
+PROGRAM Sample_ListenerFilter
+VAR
+	hr : HRESULT;
+	
+	fbMessageListener			: FB_SampleListener;	
+	fbListenerFilter			: FB_TcEventFilter; 
+	bSubscribeEtherCAT			: BOOL;
+	bSubscribeProjectEventClass	: BOOL := TRUE;
+	bSubscribed					: BOOL ;
+	bUnSubscribe				: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbMessageListener.Execute(); 
+
+//configure the listener to only retrieve 3 events when MAIN.bSendEvents is raised
+IF bSubscribeProjectEventClass THEN	
+	bSubscribeProjectEventClass := FALSE;  	
+	fbListenerFilter.Clear().IsMessage().AND_OP().EventClass.EqualTo(TC_EVENTS.TestFilterClass.Event1.uuidEventClass);  
+	hr := fbMessageListener.Subscribe2(fbListenerFilter);
+	bSubscribed := TRUE;
+END_IF
+
+//configure the listener to only retrieve events (emergency messages) coming in from EtherCAT devices
+IF bSubscribeEtherCAT THEN
+	bSubscribeEtherCAT := FALSE;  	
+	fbListenerFilter.Clear().EtherCATDevice.IsEtherCATDevice(); 
+	hr := fbMessageListener.Subscribe2(fbListenerFilter);
+	bSubscribed := TRUE;
+END_IF
+
+IF bUnSubscribe THEN 
+	bUnSubscribe := FALSE; 
+	hr := fbMessageListener.Unsubscribe();
+	bSubscribed := FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="Sample_ListenerFilter">
+      <LineId Id="100" Count="1" />
+      <LineId Id="110" Count="6" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="125" Count="5" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="117" Count="4" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.20">
+	<Project SccProjectName="SAK" SccAuxPath="SAK" SccLocalPath="SAK" SccProvider="SAK" ProjectGUID="{AB92FE3E-E06E-42FD-80E3-0BCCAE0C9826}" Target64Bit="true" ShowHideConfigurations="#x106">
+		<System>
+			<Tasks>
+				<Task Id="2" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{9E901552-1F70-4873-96A5-40ACB6993AB0}" Name="Tc3EventLoggerUsage" PrjFilePath="Tc3EventLoggerUsage\Tc3EventLoggerUsage.plcproj" TmcFilePath="Tc3EventLoggerUsage\Tc3EventLoggerUsage.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x0002" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="TcEventLogger_Sample01\TcEventLogger_Sample01.tmc">
+					<Name>Tc3EventLoggerUsage Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+	</Project>
+</TcSmProject>

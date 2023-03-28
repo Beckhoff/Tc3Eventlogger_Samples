@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<TcModuleClass>
+	<Translations>
+		<Text TxtId="Component 1">
+			<Text LcId="1031"><![CDATA[Komponente 1]]></Text>
+		</Text>
+		<Text TxtId="Component 1 Message 1">
+			<Text LcId="1031"><![CDATA[Komponente 1 Meldung 1]]></Text>
+		</Text>
+		<Text TxtId="Component 1 Message 2">
+			<Text LcId="1031"><![CDATA[Komponente 1 Meldung 2]]></Text>
+		</Text>
+		<Text TxtId="Component 2">
+			<Text LcId="1031"><![CDATA[Komponente 2]]></Text>
+		</Text>
+		<Text TxtId="Component 2 Message 1">
+			<Text LcId="1031"><![CDATA[Komponente 2 Meldung 1]]></Text>
+		</Text>
+		<Text TxtId="Component 2 Message 2">
+			<Text LcId="1031"><![CDATA[Komponente 2 Meldung 2]]></Text>
+		</Text>
+	</Translations>
+	<DataTypes>
+		<DataType>
+			<Name GUID="{44444444-4444-4444-4444-444445444000}">Component_1</Name>
+			<DisplayName TxtId=""><![CDATA[Component 1]]></DisplayName>
+			<EventId>
+				<Name Id="1">Component_1_Message_1</Name>
+				<DisplayName TxtId=""><![CDATA[Component 1 Message 1]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">Component_1_Message_2</Name>
+				<DisplayName TxtId=""><![CDATA[Component 1 Message 2]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{F9990A87-7D9B-4856-BC46-A1ED1AE9D700}"/>
+				<Hide GUID="{65010D3E-CC54-429A-B031-C2D4A9461F96}"/>
+				<Hide GUID="{DEED06AF-9D3A-4772-A455-0806DB77CD77}"/>
+			</Hides>
+		</DataType>
+		<DataType>
+			<Name GUID="{44444444-4444-4444-4444-444446444000}">Component_2</Name>
+			<DisplayName TxtId=""><![CDATA[Component 2]]></DisplayName>
+			<EventId>
+				<Name Id="1">Component_2_Message_1</Name>
+				<DisplayName TxtId=""><![CDATA[Component 2 Message 1]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">Component_2_Message_2</Name>
+				<DisplayName TxtId=""><![CDATA[Component 2 Message 2]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{A15EEB5A-C220-4508-8371-096E7029D0FE}"/>
+				<Hide GUID="{6F083671-C500-4AFD-BF18-396F6523553E}"/>
+			</Hides>
+		</DataType>
+	</DataTypes>
+</TcModuleClass>

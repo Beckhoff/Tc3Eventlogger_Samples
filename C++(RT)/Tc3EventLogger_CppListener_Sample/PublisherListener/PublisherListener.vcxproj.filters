@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{4a0cdaab-d4e7-450e-824c-5e8fbc62b9e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{d9ca4005-33b6-45b8-827a-47558d3d8c58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TwinCAT UM Files">
+      <UniqueIdentifier>{2207d6d0-0fe1-48c8-9249-4758ad3add2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TwinCAT RT Files">
+      <UniqueIdentifier>{3e06695b-1fb5-4a80-b4fb-24953f912336}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TMC Files">
+      <UniqueIdentifier>{9be1a4e4-3735-4fd4-a38c-4c2e6fec7fac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TwinCAT OS Files">
+      <UniqueIdentifier>{b6ae3db3-991a-437e-8e2d-f084a1b687cc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TcPch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PublisherListenerClassFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PublisherListenerInterfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PublisherListenerServices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PublisherListenerCtrl.h">
+      <Filter>TwinCAT UM Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PublisherListenerDriver.h">
+      <Filter>TwinCAT RT Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PublisherModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ListenerModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TcPch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PublisherListenerClassFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PublisherListenerCtrl.cpp">
+      <Filter>TwinCAT UM Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PublisherListenerW32.cpp">
+      <Filter>TwinCAT UM Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PublisherListenerDriver.cpp">
+      <Filter>TwinCAT RT Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PublisherModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ListenerModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PublisherListenerMain.cpp">
+      <Filter>TwinCAT OS Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PublisherListener.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="PublisherListenerW32.rc">
+      <Filter>TwinCAT UM Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PublisherListenerW32.def">
+      <Filter>TwinCAT UM Files</Filter>
+    </None>
+    <None Include="PublisherListener.tmc">
+      <Filter>TMC Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="PublisherListenerW32.idl">
+      <Filter>TwinCAT UM Files</Filter>
+    </Midl>
+  </ItemGroup>
+</Project>

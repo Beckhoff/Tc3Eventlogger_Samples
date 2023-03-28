@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="FB_MathCalculation" Id="{f3553769-4f87-43e5-9171-428078be63d2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_MathCalculation
+VAR_INPUT
+END_VAR
+VAR_OUTPUT 
+	bError : BOOL;
+	ipResultMessage : I_TcMessage := fbResult;
+END_VAR
+
+VAR
+	fbResult : FB_TcMessage;
+(*	fbSource : FB_TcSourceInfo;	// optional *)
+	
+	hrLastInternalError : HRESULT;
+	
+	 {attribute 'hide'}
+	bOwnTL : BOOL; // own trace level is set
+	 {attribute 'hide'}
+	eOwnTL : TcEventSeverity := TcEventSeverity.Critical;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Addition" Id="{148727a5-02cd-4163-8e79-95a15c9851c8}">
+      <Declaration><![CDATA[// returns TRUE if succeeded
+METHOD Addition : BOOL
+VAR_INPUT
+	nIn1 : UDINT;
+	nIn2 : UDINT;
+	nSum : REFERENCE TO UDINT;
+END_VAR
+
+VAR
+	hr : HRESULT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nSum := nIn1 + nIn2;
+
+IF (nSum < nIn1) THEN // an overflow occurred
+	bError := TRUE;
+
+	IF NOT fbResult.EqualsToEventEntryEx(stOther:=TC_EVENTS.Win32EventClass.ERROR_ARITHMETIC_OVERFLOW) THEN
+		hr := fbResult.CreateEx(TC_EVENTS.Win32EventClass.ERROR_ARITHMETIC_OVERFLOW, 0 ); //This uses dyn ressources and shouldn't be called cyclically.
+		IF FAILED(hr) THEN
+			hrLastInternalError := hr;
+		END_IF
+		
+		IF fbResult.eSeverity >= eTraceLevel THEN
+			hr := fbResult.Send(0);
+			IF FAILED(hr) THEN
+				hrLastInternalError := hr;
+			END_IF
+		END_IF 
+	END_IF
+	
+ELSE
+	Addition := TRUE;
+	bError := FALSE;
+	IF NOT fbResult.EqualsToEventEntryEx(stOther:=SUCCESS_EVENT) THEN
+		hr := fbResult.CreateEx(SUCCESS_EVENT, 0 ); //This uses dyn ressources and shouldn't be called cyclically.
+		IF FAILED(hr) THEN
+			hrLastInternalError := hr;
+		END_IF
+	END_IF
+	
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="bTraceLevelDefault" Id="{ee6b29d3-e8c3-4031-b236-440c8959e66a}">
+      <Declaration><![CDATA[// whether the event trace level is taken from the library default or not. This could be set via Online View too.
+{attribute 'monitoring':='call'}
+PROPERTY bTraceLevelDefault : BOOL]]></Declaration>
+      <Get Name="Get" Id="{324ca596-f337-4258-a112-fb33c200676d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bTraceLevelDefault := NOT bOwnTL;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{d5eef79d-4e5e-4499-849e-1421233d08b0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bOwnTL := NOT bTraceLevelDefault;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Division" Id="{da0279bc-ff01-4b2a-b792-30ddd4c9187d}">
+      <Declaration><![CDATA[// returns TRUE if succeeded
+METHOD Division : BOOL
+VAR_INPUT
+	fDividend : LREAL;
+	fDivisor  : LREAL;
+	fQuotient : REFERENCE TO LREAL;
+END_VAR
+
+VAR
+	hr : HRESULT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF (fDivisor = 0) THEN
+	bError := TRUE;
+	//adapt source name if required (default is ads symbol name)
+	//fbSource.Clear();
+	//fbSource.sName := 'Math Calculation';
+	IF NOT fbResult.EqualsToEventEntryEx(stOther:=TC_EVENTS.CalculationEventClass.DivisionByZero) THEN
+		hr := fbResult.CreateEx(TC_EVENTS.CalculationEventClass.DivisionByZero, 0 (*fbSource*) ); //This uses dyn ressources and shouldn't be called cyclically.
+		IF FAILED(hr) THEN
+			hrLastInternalError := hr;
+		END_IF
+		//set Arguments if required
+		//fbResult.ipArguments.Clear().Add ...
+		//set JSON attribute if required
+		//fbResult.SetJsonAttribute('{"DivionByZero":1,"Divisor":0}');
+		
+		IF fbResult.eSeverity >= eTraceLevel THEN
+			hr := fbResult.Send(0);
+			IF FAILED(hr) THEN
+				hrLastInternalError := hr;
+			END_IF
+		END_IF 
+	END_IF
+	
+ELSE
+	fQuotient := fDividend / fDivisor;
+	Division := TRUE;
+	bError := FALSE;
+	IF NOT fbResult.EqualsToEventEntryEx(stOther:=SUCCESS_EVENT) THEN
+		hr := fbResult.CreateEx(SUCCESS_EVENT, 0 (*fbSource*) ); //This uses dyn ressources and shouldn't be called cyclically.
+		IF FAILED(hr) THEN
+			hrLastInternalError := hr;
+		END_IF
+	END_IF
+	
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="eTraceLevel" Id="{ff84487f-e850-4269-a2de-648da5e8ea8c}">
+      <Declaration><![CDATA[// current trace level for this FB. This could be set via Online View too. 
+{attribute 'monitoring':='call'}
+PROPERTY eTraceLevel : TcEventSeverity]]></Declaration>
+      <Get Name="Get" Id="{feefb493-8041-4828-828b-d8af7ea1ed1b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF bOwnTL THEN
+	eTraceLevel := eOwnTL;
+ELSE
+	eTraceLevel := GVL.eEventTraceLevel;
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{e6d3034a-ec28-4113-8711-e467e0effe5b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bOwnTL := TRUE;
+eOwnTL := eTraceLevel;
+]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <LineIds Name="FB_MathCalculation">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MathCalculation.Addition">
+      <LineId Id="55" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="13" Count="1" />
+      <LineId Id="17" Count="5" />
+      <LineId Id="27" Count="9" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="41" Count="8" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MathCalculation.bTraceLevelDefault.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MathCalculation.bTraceLevelDefault.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MathCalculation.Division">
+      <LineId Id="6" Count="0" />
+      <LineId Id="165" Count="0" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="190" Count="0" />
+      <LineId Id="180" Count="0" />
+      <LineId Id="216" Count="1" />
+      <LineId Id="232" Count="2" />
+      <LineId Id="224" Count="1" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="253" Count="1" />
+      <LineId Id="219" Count="1" />
+      <LineId Id="237" Count="1" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="221" Count="0" />
+      <LineId Id="199" Count="0" />
+      <LineId Id="215" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="143" Count="1" />
+      <LineId Id="226" Count="0" />
+      <LineId Id="228" Count="0" />
+      <LineId Id="227" Count="0" />
+      <LineId Id="240" Count="1" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="229" Count="0" />
+      <LineId Id="223" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="198" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MathCalculation.eTraceLevel.Get">
+      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="1" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_MathCalculation.eTraceLevel.Set">
+      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="MAIN" Id="{4e0d88d5-cdad-48a2-a95a-718032bb0b15}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	nState : USINT := 0;
+
+	fDividend : LREAL := 42.0; 
+	fDivisor : LREAL := 1.0; // set to zero to force an error
+	fQuotient : LREAL;
+	
+	// application POU using the result message interface to specify occurred errors (e.g. division by zero)
+	fbMath : FB_MathCalculation := (eTraceLevel:=TcEventSeverity.Verbose); 
+	
+	// another application POU which encapsulates FB_MathCalculation
+	fbCtrl : FB_Control := (eTraceLevel:=TcEventSeverity.Verbose); 
+	
+	sErrorText : STRING(255);
+	bGetText : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE nState OF
+0: // calculation with fbMath
+	fbMath.Division(fDividend:=fDividend, fDivisor:=fDivisor, fQuotient:=fQuotient);
+	IF fbMath.bError THEN
+		// error handling
+		nState := 10;
+	END_IF
+	
+1: // calculation with fbCtrl
+	fbCtrl.Execute();
+	IF fbCtrl.bError THEN
+		// error handling
+		// e.g. error text could be requested if execution failed.
+		bGetText := TRUE;
+		nState := 10;
+	END_IF
+	
+10: // error occurred
+	IF bGetText THEN
+		IF fbCtrl.ipResultMessage.RequestEventText(	nLangId:=Tc3_EventLogger.GVL.nLangId_OnlineMonitoring, 
+													sResult:=sErrorText, nResultSize:=SIZEOF(sErrorText) ) THEN
+			bGetText := FALSE;
+		END_IF
+	END_IF
+	
+END_CASE
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="73" Count="0" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="74" Count="1" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="136" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="102" Count="2" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="138" Count="0" />
+      <LineId Id="127" Count="1" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="129" Count="1" />
+      <LineId Id="125" Count="1" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="81" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

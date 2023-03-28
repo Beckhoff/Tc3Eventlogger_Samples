@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="Sample_ExportFilter" Id="{22d7733b-ca62-4e25-bc67-09ac3bdc7973}" SpecialFunc="None">
+    <Declaration><![CDATA[// sample about how to export filtered logged events
+PROGRAM Sample_ExportFilter
+VAR
+	hr : HRESULT;
+	
+	bExport				: BOOL;
+	fbCsvExportSetting	: FB_TcEventCsvExportSettings; 
+	fbExportFilter		: FB_TcEventFilter; 
+	sExportFileName		: STRING := 'c:\temp\Eventlogger-export.csv';
+	
+	fbEventLogger	: FB_TcEventLogger;
+	fbTrig			: R_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//this exports the messages with 'MessageTest' eventclass but not the alarms
+fbTrig(CLK:=bExport);
+IF bExport THEN
+	IF fbTrig.Q THEN 
+		fbCsvExportSetting.Clear();
+		fbCsvExportSetting.AddLanguage(TcLcid.de_DE, 'German');
+		fbCsvExportSetting.AddFilter(fbExportFilter); 
+		fbExportFilter.Clear().IsMessage().AND_OP().EventClass.EqualTo(TC_EVENTS.MessageTest.Message.uuidEventClass);
+	END_IF
+	IF fbEventLogger.ExportLoggedEvents(sExportFileName, fbCsvExportSetting, hrErrorCode=>hr) THEN // async request returns TRUE if not any more busy 
+		bExport := FALSE;
+	END_IF
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="Sample_ExportFilter">
+      <LineId Id="6" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="8" Count="3" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="12" Count="2" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="FB_Control" Id="{5561d107-3279-45ab-a9c8-cd8104bd4128}" SpecialFunc="None">
+    <Declaration><![CDATA[// encapsulation of FB_MathCalculation
+FUNCTION_BLOCK FB_Control
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+	bError : BOOL;
+	ipResultMessage : I_TcMessage := fbResult;
+END_VAR
+
+VAR
+	fbResult : FB_TcMessage;
+	fbSource : FB_TcSourceInfo;
+	
+	fDividend : LREAL := 42.0; 
+	fDivisor : LREAL := 1.0; 
+	fQuotient : LREAL;
+	
+	fbMath : FB_MathCalculation := (eTraceLevel:=TcEventSeverity.Critical); // nearly nothing of this internal FB should be logged 
+	
+	hrLastInternalError : HRESULT;
+	
+	 {attribute 'hide'}
+	bOwnTL : BOOL; // own trace level is set
+	 {attribute 'hide'} 
+	eOwnTL : TcEventSeverity := TcEventSeverity.Critical;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="bTraceLevelDefault" Id="{5273b146-198f-4b8e-ba7e-10f941d90d90}">
+      <Declaration><![CDATA[// whether the event trace level is taken from the library default or not. This could be set via Online View too.
+{attribute 'monitoring':='call'}
+PROPERTY bTraceLevelDefault : BOOL]]></Declaration>
+      <Get Name="Get" Id="{39fb135c-0cd3-4548-871b-61ad4284e3d7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bTraceLevelDefault := NOT bOwnTL;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{56f4ecbc-2392-426e-bd6e-3e75549bbf3a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bOwnTL := NOT bTraceLevelDefault;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Property Name="eTraceLevel" Id="{7ad97b81-3d94-4070-8f5b-10b3cd58c65c}">
+      <Declaration><![CDATA[// current trace level for this FB. This could be set via Online View too.
+{attribute 'monitoring':='call'}
+PROPERTY eTraceLevel : TcEventSeverity]]></Declaration>
+      <Get Name="Get" Id="{4ce2dc05-e03b-4405-aab1-47a781a2d207}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF bOwnTL THEN
+	eTraceLevel := eOwnTL;
+ELSE
+	eTraceLevel := GVL.eEventTraceLevel;
+END_IF]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{c49f25db-1e0c-4efb-8c05-198c1b5b4f89}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[bOwnTL := TRUE;
+eOwnTL := eTraceLevel;
+]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Execute" Id="{841ee851-c14c-4743-8f76-80653b021600}">
+      <Declaration><![CDATA[METHOD Execute
+VAR_INPUT
+END_VAR
+
+VAR
+	hr : HRESULT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[fbMath.Division(fDividend:=fDividend, fDivisor:=fDivisor, fQuotient:=fQuotient);
+
+bError := fbMath.bError;
+IF NOT fbResult.EqualsToEventEntryEx(stOther:=fbMath.ipResultMessage.stEventEntry) THEN
+	fbSource.ResetToDefault();
+	fbSource.ExtendName(sExtension:='.Execute() -> ');
+	fbSource.ExtendName(sExtension:=fbMath.ipResultMessage.ipSourceInfo.sName);
+	fbSource.ExtendName(sExtension:='.Division()');
+	hr := fbResult.CreateEx(stEventEntry:=fbMath.ipResultMessage.stEventEntry, ipSourceInfo:=fbSource);
+	IF FAILED(hr) THEN
+		hrLastInternalError := hr;
+	END_IF
+
+	IF bError AND fbResult.eSeverity >= eTraceLevel THEN
+		hr := fbResult.Send(0);
+		IF FAILED(hr) THEN
+			hrLastInternalError := hr;
+		END_IF
+	END_IF 
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_Control">
+      <LineId Id="38" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Control.bTraceLevelDefault.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Control.bTraceLevelDefault.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Control.eTraceLevel.Get">
+      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="8" Count="1" />
+      <LineId Id="6" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_Control.eTraceLevel.Set">
+      <LineId Id="2" Count="0" />
+      <LineId Id="5" Count="1" />
+    </LineIds>
+    <LineIds Name="FB_Control.Execute">
+      <LineId Id="9" Count="2" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="43" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="27" Count="1" />
+      <LineId Id="48" Count="1" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="16" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

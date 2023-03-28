@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_SimpleAdsLogEvent_new" Id="{dcd63b87-8244-4fbd-b846-9778a4dfb82d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SimpleAdsLogEvent_new
+VAR_INPUT
+	bSetEvent : BOOL; 
+	bQuit : BOOL; 
+	SourceID : DINT;  
+	EventID : DINT;  
+END_VAR
+VAR_OUTPUT
+	ErrId : UDINT; 
+	Error : BOOL;  
+END_VAR
+VAR
+	fb_alarm : FB_TcAlarm; 
+	b_InternalSetEvent : BOOL;
+    raisingRTrig : R_TRIG;  
+	fallingFTrig : F_TRIG;
+    clearingRTrig : R_TRIG;  
+	e: TcEventEntry;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[raisingRTrig(CLK := bSetEvent); 
+fallingFTrig(CLK := bSetEvent); 
+clearingRTrig(CLK := bQuit); 
+
+// bSetEvent = TRUE -> raise 
+IF raisingRTrig.Q AND NOT fb_alarm.bRaised THEN   
+  e := F_MapSource(SourceId, EventID);  
+  fb_alarm.CreateEx2(e,0); 
+  fb_alarm.Raise(0);
+END_IF  
+
+// bSetEvent = FALSE -> clear 
+IF fallingFTrig.Q AND fb_alarm.bRaised THEN   
+  IF(fb_alarm.ipEvent <> 0) THEN 
+    ErrId := 0; 
+  	fb_alarm.Clear(0);
+  ELSE 
+	  ErrId := 1; 
+  END_IF 
+END_IF  
+
+// bQuit = TRUE -> confirm (if ReqMustCon = TRUE) 
+IF clearingRTrig.Q AND fb_alarm.bActive THEN   
+  IF(fb_alarm.ipEvent <> 0) THEN 
+    ErrId := 0; 
+  	fb_alarm.Confirm(0);
+  ELSE 
+	  ErrId := 1; 
+  END_IF  
+END_IF  ]]></ST>
+    </Implementation>
+    <LineIds Name="FB_SimpleAdsLogEvent_new">
+      <LineId Id="32" Count="28" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="F_MapSource" Id="{a2afb40a-274e-4876-9a16-2f9d5feecf6f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_MapSource : TcEventEntry
+VAR_INPUT
+	SourceID : DINT;  
+	EventID : DINT;
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE SourceID OF 
+	1:
+	CASE EventID OF 
+  	  1: F_MapSource := TC_EVENTS.Component_1.Component_1_Message_1; 
+	  2: F_MapSource := TC_EVENTS.Component_1.Component_1_Message_2;
+	END_CASE
+	2:  
+	CASE EventID OF 
+  	  1: F_MapSource := TC_EVENTS.Component_2.Component_2_Message_1; 
+	  2: F_MapSource := TC_EVENTS.Component_2.Component_2_Message_2;
+	END_CASE
+END_CASE
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="F_MapSource">
+      <LineId Id="12" Count="7" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="22" Count="2" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

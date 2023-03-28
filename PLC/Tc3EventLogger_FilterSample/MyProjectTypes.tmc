@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<TcModuleClass>
+	<DataTypes>
+		<DataType>
+			<Name GUID="{54CC5482-AD79-4CDC-8C3E-B3983B36ED66}" PersistentType="true">TestFilterClass2</Name>
+			<DisplayName TxtId=""><![CDATA[TestFilterClass2 Description]]></DisplayName>
+			<EventId>
+				<Name Id="1">EventA</Name>
+				<DisplayName TxtId=""><![CDATA[EventA]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">EventB</Name>
+				<DisplayName TxtId=""><![CDATA[EventB]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{6C7CB954-D7D0-414E-95B4-31A9EC85C42E}"/>
+			</Hides>
+		</DataType>
+		<DataType>
+			<Name GUID="{695E2E22-3F74-4EC5-A795-E51962A66FCB}" PersistentType="true">TestFilterClass</Name>
+			<DisplayName TxtId=""><![CDATA[TestFilterClass Descripton]]></DisplayName>
+			<EventId>
+				<Name Id="1">Event1</Name>
+				<DisplayName TxtId=""><![CDATA[Event1]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">Event2</Name>
+				<DisplayName TxtId=""><![CDATA[Event2]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="3">Event3</Name>
+				<DisplayName TxtId=""><![CDATA[Event3]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="4">Event4</Name>
+				<DisplayName TxtId=""><![CDATA[Event4]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{83EB7F2E-3DAB-4DC5-B89D-ACDC48460D16}"/>
+				<Hide GUID="{FAF1CD0B-5E3F-4C03-98B9-D3B0D2B4F20F}"/>
+				<Hide GUID="{A865F643-5709-4891-9A89-A4CC7A73502D}"/>
+			</Hides>
+		</DataType>
+		<DataType>
+			<Name GUID="{79BBCF29-667E-4FC8-A494-90C1A7E736D6}" PersistentType="true">MessageTest</Name>
+			<DisplayName TxtId=""><![CDATA[MessageTest Description]]></DisplayName>
+			<EventId>
+				<Name Id="1">Message</Name>
+				<DisplayName TxtId=""><![CDATA[Message]]></DisplayName>
+				<Severity>Info</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">Alarm</Name>
+				<DisplayName TxtId=""><![CDATA[Alarm]]></DisplayName>
+				<Severity>Info</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{B0450D7F-B160-42D8-8112-04183BA417DD}"/>
+				<Hide GUID="{30B3D89D-90C7-4125-87E3-D8692C3C31CF}"/>
+				<Hide GUID="{01B07E18-4760-4B52-BEE7-A48DB4BD36EC}"/>
+				<Hide GUID="{42CF0CFC-124F-4E63-93FF-8A80D1641F59}"/>
+				<Hide GUID="{35F5DAAD-A8F9-4A76-9079-7468F7A9A787}"/>
+			</Hides>
+		</DataType>
+	</DataTypes>
+</TcModuleClass>

@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcModuleClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2009/05/TcModuleClass">
+  <Vendor>
+    <Name>C++ Module Vendor</Name>
+  </Vendor>
+  <DataTypes>
+    <DataType>
+      <Name GUID="{f5d63276-0ed5-42d3-918d-200a4fb9e58a}">MyCppEventClass</Name>
+      <DisplayName TxtId=""><![CDATA[EventClass1_DisplayText]]></DisplayName>
+      <EventId>
+        <Name Id="1">MyCppMessage</Name>
+        <DisplayName TxtId=""><![CDATA[My Cpp Message]]></DisplayName>
+        <Severity>Verbose</Severity>
+      </EventId>
+      <EventId>
+        <Name Id="2">MyCppAlarm</Name>
+        <DisplayName TxtId=""><![CDATA[My Cpp Alarm]]></DisplayName>
+        <Severity>Error</Severity>
+      </EventId><Hides><Hide GUID="{9615df66-61f5-49e0-a797-03476a7170c9}" /></Hides>
+    </DataType>
+    <DataType>
+      <Name GUID="{47B6BEE8-0ECB-4C92-9D93-FB11D3BA0336}" CName="ITcMessageListener*">ITcMessageListener</Name>
+      <BitSize X64="64">32</BitSize>
+      <BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
+      <Method>
+        <Name>OnMessageSent</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>ipEvent</Name>
+          <Type GUID="{4A9CB0E9-8969-4B85-B567-605110511200}">ITcEvent</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+    </DataType>
+    <DataType>
+      <Name GUID="{B57D3F4A-0836-49B0-81C3-BED5F4817EC9}" TcBaseType="true" CName="TcEventSeverity" RemovableEnumPrefix="TCEVENTSEVERITY_">TcEventSeverity</Name>
+      <BitSize>16</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000006}">INT</BaseType>
+      <EnumInfo>
+        <Text><![CDATA[TCEVENTSEVERITY_Verbose]]></Text>
+        <Enum>0</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[TCEVENTSEVERITY_Info]]></Text>
+        <Enum>1</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[TCEVENTSEVERITY_Warning]]></Text>
+        <Enum>2</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[TCEVENTSEVERITY_Error]]></Text>
+        <Enum>3</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[TCEVENTSEVERITY_Critical]]></Text>
+        <Enum>4</Enum>
+      </EnumInfo>
+      <Properties>
+        <Property>
+          <Name>plcAttribute_qualified_only</Name>
+        </Property>
+        <Property>
+          <Name>plcAttribute_strict</Name>
+        </Property>
+      </Properties>
+      <Hides>
+        <Hide GUID="{777FF09F-0B00-4AF2-BD7C-C1E2CE4A0947}" />
+        <Hide GUID="{EC3C119D-4FEC-4197-96FB-DAE1B7C403FB}" />
+      </Hides>
+    </DataType>
+    <DataType>
+      <Name GUID="{05B507B4-8043-4A57-BCD7-5BC554B64B83}" TcBaseType="true" CName="TcSourceInfoType">TcSourceInfoType</Name>
+      <BitSize>32</BitSize>
+      <BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+      <EnumInfo>
+        <Text><![CDATA[Undefined]]></Text>
+        <Enum>0</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[Id]]></Text>
+        <Enum>1</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[Guid]]></Text>
+        <Enum>2</Enum>
+      </EnumInfo>
+      <EnumInfo>
+        <Text><![CDATA[Name]]></Text>
+        <Enum>4</Enum>
+      </EnumInfo>
+      <Properties>
+        <Property>
+          <Name>plcAttribute_qualified_only</Name>
+        </Property>
+        <Property>
+          <Name>plcAttribute_strict</Name>
+        </Property>
+      </Properties>
+      <Hides>
+        <Hide GUID="{3F74866B-4568-47E2-894F-D4B96829DBD0}" />
+      </Hides>
+    </DataType>
+    <DataType>
+      <Name GUID="{02B179F9-9BBE-4D12-A24F-5E65C9CF659C}" TcBaseType="true" CName="TcSerializedSourceInfoType">TcSerializedSourceInfoType</Name>
+      <BitSize>96</BitSize>
+      <SubItem>
+        <Name>eType</Name>
+        <Type GUID="{05B507B4-8043-4A57-BCD7-5BC554B64B83}">TcSourceInfoType</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>obData</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>cbData</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{F7BF6767-548B-493C-899B-06A477976F11}" TcBaseType="true" CName="ITcSourceInfo*">ITcSourceInfo</Name>
+      <BitSize X64="64">32</BitSize>
+      <BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
+      <Method>
+        <Name>GetNumTypes</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>nCount</Name>
+          <Type GUID="{18071995-0000-0000-0000-000000000008}" ReferenceTo="true">UDINT</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>GetTypes</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>ppSourceInfoTypes</Name>
+          <Type GUID="{02B179F9-9BBE-4D12-A24F-5E65C9CF659C}" PointerTo="2" Const="1">TcSerializedSourceInfoType</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>GetDataSize</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>cbData</Name>
+          <Type GUID="{18071995-0000-0000-0000-000000000008}" ReferenceTo="true">UDINT</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>GetData</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>ppData</Name>
+          <Type GUID="{18071995-0000-0000-0000-000000000018}" PointerTo="1" Const="1">PVOID</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+    </DataType>
+    <DataType>
+      <Name GUID="{4A9CB0E9-8969-4B85-B567-605110511200}" TcBaseType="true" CName="ITcEvent*">ITcEvent</Name>
+      <BitSize X64="64">32</BitSize>
+      <BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
+      <Method>
+        <Name>GetEventClass</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>eventClass</Name>
+          <Type GUID="{18071995-0000-0000-0000-000000000021}" ReferenceTo="true" Const="1">GUID</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>GetEventId</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>eventId</Name>
+          <Type GUID="{18071995-0000-0000-0000-000000000008}" ReferenceTo="true">UDINT</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>GetSeverity</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>severity</Name>
+          <Type GUID="{B57D3F4A-0836-49B0-81C3-BED5F4817EC9}" ReferenceTo="true">TcEventSeverity</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>GetSourceInfo</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>pipSourceInfo</Name>
+          <Type GUID="{F7BF6767-548B-493C-899B-06A477976F11}" PointerTo="1">ITcSourceInfo</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>GetJsonAttribute</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>sJsonAttribute</Name>
+          <Type GUID="{18071995-0000-0000-0000-000100000050}" ReferenceTo="true">STRING(80)</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+        <Parameter>
+          <Name>nJsonAttribute</Name>
+          <Type GUID="{18071995-0000-0000-0000-000000000008}" ReferenceTo="true">UDINT</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>GetText</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>nLangId</Name>
+          <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+          <BitSize>32</BitSize>
+        </Parameter>
+        <Parameter>
+          <Name>pipResult</Name>
+          <Type GUID="{23293450-14C5-484C-B74F-4E0A8DFD115D}" PointerTo="1">ITcAsyncStringResult</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>GetEventClassName</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>nLangId</Name>
+          <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+          <BitSize>32</BitSize>
+        </Parameter>
+        <Parameter>
+          <Name>pipResult</Name>
+          <Type GUID="{23293450-14C5-484C-B74F-4E0A8DFD115D}" PointerTo="1">ITcAsyncStringResult</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+    </DataType>
+    <DataType>
+      <Name GUID="{C0CCD9D7-DDCD-4C2D-A24C-B1F3257C9A64}" CName="ITcAlarmListener*">ITcAlarmListener</Name>
+      <BitSize X64="64">32</BitSize>
+      <BaseType GUID="{00000001-0000-0000-E000-000000000064}">ITcUnknown</BaseType>
+      <Method>
+        <Name>OnAlarmRaised</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>ipEvent</Name>
+          <Type GUID="{4A9CB0E9-8969-4B85-B567-605110511200}">ITcEvent</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>OnAlarmCleared</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>ipEvent</Name>
+          <Type GUID="{4A9CB0E9-8969-4B85-B567-605110511200}">ITcEvent</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>OnAlarmConfirmed</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>ipEvent</Name>
+          <Type GUID="{4A9CB0E9-8969-4B85-B567-605110511200}">ITcEvent</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+      <Method>
+        <Name>OnAlarmDisposed</Name>
+        <ReturnType GUID="{18071995-0000-0000-0000-000000000019}">HRESULT</ReturnType>
+        <ReturnBitSize>32</ReturnBitSize>
+        <Parameter>
+          <Name>ipEvent</Name>
+          <Type GUID="{4A9CB0E9-8969-4B85-B567-605110511200}">ITcEvent</Type>
+          <BitSize X64="64">32</BitSize>
+        </Parameter>
+      </Method>
+    </DataType>
+  </DataTypes>
+  <Groups>
+    <Group SortOrder="701">
+      <Name>C++</Name>
+      <DisplayName>C++ Modules</DisplayName>
+    </Group>
+  </Groups>
+  <Modules>
+    <Module GUID="{e520d46e-1bd7-4996-acef-aac0050f0362}" Group="C++">
+      <Name>PublisherModule</Name>
+      <CLSID ClassFactory="PublisherListener">{e520d46e-1bd7-4996-acef-aac0050f0362}</CLSID>
+      <Licenses>
+        <License>
+          <LicenseId>{304D006A-8299-4560-AB79-438534B50288}</LicenseId>
+          <Comment>TC3 C++</Comment>
+        </License>
+      </Licenses>
+      <InitSequence>SO</InitSequence>
+      <Contexts>
+        <Context>
+          <Id>1</Id>
+        </Context>
+      </Contexts>
+      <Interfaces>
+        <Interface DisableCodeGeneration="true">
+          <Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{03000010-0000-0000-E000-000000000064}">ITcCyclic</Type>
+        </Interface>
+        <Interface DisableCodeGeneration="true">
+          <Type GUID="{03000012-0000-0000-E000-000000000064}">ITcADI</Type>
+        </Interface>
+        <Interface DisableCodeGeneration="true">
+          <Type GUID="{03000018-0000-0000-E000-000000000064}">ITcWatchSource</Type>
+        </Interface>
+      </Interfaces>
+      <Parameters>
+        <Parameter HideParameter="true">
+          <Name>TraceLevelMax</Name>
+          <Comment>Controls the amount of log messages.</Comment>
+          <BaseType GUID="{8007ae3b-86bb-40f2-b385-ef87fcc239a4}">TcTraceLevel</BaseType>
+          <PTCID>#x03002103</PTCID>
+          <ContextId>1</ContextId>
+        </Parameter>
+        <Parameter>
+          <Name>Parameter</Name>
+          <SubItem>
+            <Name>data1</Name>
+            <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+          </SubItem>
+          <SubItem>
+            <Name>data2</Name>
+            <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+          </SubItem>
+          <SubItem>
+            <Name>data3</Name>
+            <Type GUID="{18071995-0000-0000-0000-00000000000e}">LREAL</Type>
+          </SubItem>
+          <PTCID>#x00000001</PTCID>
+          <ContextId>1</ContextId>
+        </Parameter>
+      </Parameters>
+      <DataAreas>
+        <DataArea>
+          <AreaNo AreaType="InputDst">0</AreaNo>
+          <Name>Inputs</Name>
+          <ContextId>1</ContextId>
+          <Symbol>
+            <Name>bSendMessage</Name>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+          </Symbol>
+          <Symbol>
+            <Name>bRaiseAlarm</Name>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+          </Symbol>
+          <Symbol>
+            <Name>bClearAlarm</Name>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+          </Symbol>
+          <Symbol>
+            <Name>bConfirmAlarm</Name>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+          </Symbol>
+          <Symbol>
+            <Name>bAddJsonToMessage</Name>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+          </Symbol>
+          <Symbol>
+            <Name>bClearJsonFromMessage</Name>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000030}">BOOL</BaseType>
+          </Symbol>
+        </DataArea>
+        <DataArea>
+          <AreaNo AreaType="OutputSrc">1</AreaNo>
+          <Name>Outputs</Name>
+          <ContextId>1</ContextId>
+        </DataArea>
+      </DataAreas>
+      <InterfacePointers>
+        <InterfacePointer>
+          <PTCID>#x03002060</PTCID>
+          <Name>CyclicCaller</Name>
+          <Type GUID="{0300001e-0000-0000-e000-000000000064}">ITcCyclicCaller</Type>
+        </InterfacePointer>
+      </InterfacePointers>
+      <DataPointers />
+      <Deployment />
+      <EventClasses>
+        <EventClass>
+          <Type GUID="{f5d63276-0ed5-42d3-918d-200a4fb9e58a}">MyCppEventClass</Type>
+        </EventClass>
+      </EventClasses>
+    </Module>
+    <Module GUID="{1c8e8bc1-bb66-4f3c-9a1a-c80dac8dc1aa}" Group="C++">
+      <Name>ListenerModule</Name>
+      <CLSID ClassFactory="PublisherListener">{1c8e8bc1-bb66-4f3c-9a1a-c80dac8dc1aa}</CLSID>
+      <Licenses>
+        <License>
+          <LicenseId>{304D006A-8299-4560-AB79-438534B50288}</LicenseId>
+          <Comment>TC3 C++</Comment>
+        </License>
+      </Licenses>
+      <InitSequence>SO</InitSequence>
+      <Contexts>
+        <Context>
+          <Id>1</Id>
+        </Context>
+      </Contexts>
+      <Interfaces>
+        <Interface DisableCodeGeneration="true">
+          <Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{03000010-0000-0000-E000-000000000064}">ITcCyclic</Type>
+        </Interface>
+        <Interface DisableCodeGeneration="true">
+          <Type GUID="{03000012-0000-0000-E000-000000000064}">ITcADI</Type>
+        </Interface>
+        <Interface DisableCodeGeneration="true">
+          <Type GUID="{03000018-0000-0000-E000-000000000064}">ITcWatchSource</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{c0ccd9d7-ddcd-4c2d-a24c-b1f3257c9a64}">ITcAlarmListener</Type>
+        </Interface>
+        <Interface>
+          <Type GUID="{47b6bee8-0ecb-4c92-9d93-fb11d3ba0336}">ITcMessageListener</Type>
+        </Interface>
+      </Interfaces>
+      <Parameters>
+        <Parameter HideParameter="true">
+          <Name>TraceLevelMax</Name>
+          <Comment>Controls the amount of log messages.</Comment>
+          <BaseType GUID="{8007ae3b-86bb-40f2-b385-ef87fcc239a4}">TcTraceLevel</BaseType>
+          <PTCID>#x03002103</PTCID>
+          <ContextId>1</ContextId>
+        </Parameter>
+        <Parameter>
+          <Name>Parameter</Name>
+          <SubItem>
+            <Name>data1</Name>
+            <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+          </SubItem>
+          <SubItem>
+            <Name>data2</Name>
+            <Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+          </SubItem>
+          <SubItem>
+            <Name>data3</Name>
+            <Type GUID="{18071995-0000-0000-0000-00000000000e}">LREAL</Type>
+          </SubItem>
+          <PTCID>#x00000001</PTCID>
+          <ContextId>1</ContextId>
+        </Parameter>
+      </Parameters>
+      <DataAreas>
+        <DataArea>
+          <AreaNo AreaType="InputDst">0</AreaNo>
+          <Name>Inputs</Name>
+          <ContextId>1</ContextId>
+        </DataArea>
+        <DataArea>
+          <AreaNo AreaType="OutputSrc">1</AreaNo>
+          <Name>Outputs</Name>
+          <ContextId>1</ContextId>
+          <Symbol>
+            <Name>nReceivedMessages</Name>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+          </Symbol>
+          <Symbol>
+            <Name>nReceivedAlarmRaise</Name>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+          </Symbol>
+          <Symbol>
+            <Name>nReceivedAlarmConfirm</Name>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+          </Symbol>
+          <Symbol>
+            <Name>nReceivedAlarmClear</Name>
+            <BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+          </Symbol>
+          <Symbol>
+            <Name>nReceivedAlarmDispose</Name>
+            <DisplayName TxtId="" />
+            <BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+          </Symbol>
+        </DataArea>
+      </DataAreas>
+      <InterfacePointers>
+        <InterfacePointer>
+          <PTCID>#x03002060</PTCID>
+          <Name>CyclicCaller</Name>
+          <Type GUID="{0300001e-0000-0000-e000-000000000064}">ITcCyclicCaller</Type>
+        </InterfacePointer>
+      </InterfacePointers>
+      <DataPointers />
+      <Deployment />
+    </Module>
+  </Modules>
+  <Library>
+    <Name>PublisherListener</Name>
+    <Version>0.0.0.1</Version>
+  </Library>
+</TcModuleClass>

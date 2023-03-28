@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_SampleListener" Id="{50ed088d-9a7d-4c16-86a9-e90b487e4982}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SampleListener EXTENDS FB_ListenerBase2
+VAR_INPUT
+END_VAR
+VAR_OUTPUT
+END_VAR
+VAR
+	sJsonAttribute : STRING (10000);	
+	hr : HRESULT;
+	
+	nCntMessagesSent : INT;
+	nCntAlarmsRaised : INT;
+	nCntAlarmsConfirmed : INT;
+	nCntAlarmsCleared : INT;
+	
+	//text retrieval of message
+	fbRequestEventText : FB_RequestEventText;
+	{attribute 'TcEncoding':='UTF-8'}
+	sLastMessageText : STRING;
+	bReqText : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Execute" Id="{3c7f655d-2c73-41dc-b085-26c5a3b1cef1}">
+      <Declaration><![CDATA[METHOD Execute : HRESULT
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Execute := SUPER^.Execute(); //retrieve events
+
+//retrieve the text of a message
+IF 	bReqText AND fbRequestEventText.bError THEN 
+	sLastMessageText := 'Error';
+	bReqText := FALSE; 
+ELSIF bReqText AND NOT  fbRequestEventText.bBusy THEN
+	fbRequestEventText.GetString(sLastMessageText, SIZEOF(sLastMessageText));
+	bReqText := FALSE;
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAlarmCleared" Id="{036602cd-44fc-40d2-99e6-e6b033452290}">
+      <Declaration><![CDATA[METHOD OnAlarmCleared : HRESULT
+VAR_INPUT
+	fbEvent : REFERENCE TO FB_TcEvent;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nCntAlarmsCleared := nCntAlarmsCleared + 1;
+
+OnAlarmCleared := S_OK; // in order to receive more callbacks (Set <> S_OK in order to cancel the callbacks for this program cycle.)
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAlarmConfirmed" Id="{efe870ed-8bbd-4c42-9405-bf33d81f12d4}">
+      <Declaration><![CDATA[METHOD OnAlarmConfirmed : HRESULT
+VAR_INPUT
+	fbEvent : REFERENCE TO FB_TcEvent;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nCntAlarmsConfirmed := nCntAlarmsConfirmed + 1;
+
+OnAlarmConfirmed := S_OK; // in order to receive more callbacks (Set <> S_OK in order to cancel the callbacks for this program cycle.)
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAlarmRaised" Id="{1df5b803-888d-4d2d-ab12-93687f9c1a1e}">
+      <Declaration><![CDATA[METHOD OnAlarmRaised : HRESULT
+VAR_INPUT
+	fbEvent : REFERENCE TO FB_TcEvent;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[hr := fbEvent.GetJsonAttribute(sJsonAttribute, SIZEOF(sJsonAttribute));
+nCntAlarmsRaised := nCntAlarmsRaised + 1;
+
+OnAlarmRaised := S_OK; // in order to receive more callbacks (Set <> S_OK in order to cancel the callbacks for this program cycle.)
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnMessageSent" Id="{b4dac56d-cfe9-4434-ae5b-afa117054bdb}">
+      <Declaration><![CDATA[METHOD OnMessageSent : HRESULT
+VAR_INPUT
+	fbEvent : REFERENCE TO FB_TcEvent;
+END_VAR
+
+VAR 
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[hr := fbEvent.GetJsonAttribute(sJsonAttribute, SIZEOF(sJsonAttribute));
+nCntMessagesSent := nCntMessagesSent + 1;
+
+fbRequestEventText.Request(eventClass:=fbEvent.EventClass, nEventId:=fbEvent.nEventId, nLangId:=TcLcid.en_US, ipArgs:=fbEvent.ipArguments );
+bReqText := TRUE;
+
+OnMessageSent := S_OK; // in order to receive more callbacks (Set <> S_OK in order to cancel the callbacks for this program cycle.)
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_SampleListener">
+      <LineId Id="59" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SampleListener.Execute">
+      <LineId Id="6" Count="10" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SampleListener.OnAlarmCleared">
+      <LineId Id="6" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SampleListener.OnAlarmConfirmed">
+      <LineId Id="6" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="13" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SampleListener.OnAlarmRaised">
+      <LineId Id="6" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="18" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SampleListener.OnMessageSent">
+      <LineId Id="6" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="40" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

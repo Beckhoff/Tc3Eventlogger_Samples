@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{6d28895e-a551-4e40-aefd-db38a3d26ba1}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	//The FB_SimpleAdsLogEvent_new has the same interface as the FB_SimpleAdsLogEvent sending events via the Tc2 Eventlogger
+	//The FB_SimpleAdsLogEvent_new is provided as an sample on how to make use of the resource-representation with the new Eventlogger. 
+ 	//In combination with the Excel Addin one can migrate the Resource format to the new EventClasses. Please see Infosys for more verbose information 
+ 
+	fbSimpleAdsLogEvent1 : FB_SimpleAdsLogEvent_new;
+	bTrigger1: BOOL;
+	bQuit1: BOOL;
+	
+	fbSimpleAdsLogEvent2 : FB_SimpleAdsLogEvent_new;
+	bTrigger2: BOOL;
+	bQuit2: BOOL;
+	
+	fbSimpleAdsLogEvent3 : FB_SimpleAdsLogEvent_new;
+	bTrigger3: BOOL;
+	bQuit3: BOOL;
+	
+	fbSimpleAdsLogEvent4 : FB_SimpleAdsLogEvent_new;
+	bTrigger4: BOOL;
+	bQuit4: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbSimpleAdsLogEvent1(
+	SourceID:= 1, 
+	EventID:= 1, 
+	bSetEvent:= bTrigger1, 
+	bQuit:= bQuit1, 
+	ErrId=> , 
+	Error=> );
+	
+fbSimpleAdsLogEvent2(
+	SourceID:= 1, 
+	EventID:= 2, 
+	bSetEvent:= bTrigger2, 
+	bQuit:= bQuit2, 
+	ErrId=> , 
+	Error=> );
+	
+fbSimpleAdsLogEvent3(
+	SourceID:= 2, 
+	EventID:= 1, 
+	bSetEvent:= bTrigger3, 
+	bQuit:= bQuit3, 
+	ErrId=> , 
+	Error=> );
+	
+fbSimpleAdsLogEvent4(
+	SourceID:= 2, 
+	EventID:= 2, 
+	bSetEvent:= bTrigger4, 
+	bQuit:= bQuit4, 
+	ErrId=> , 
+	Error=> );]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="6" Count="29" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

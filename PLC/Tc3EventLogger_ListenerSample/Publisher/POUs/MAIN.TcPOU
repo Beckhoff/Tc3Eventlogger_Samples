@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{9f520a4d-ae50-41fb-ba73-0842ad84d02a}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	bSendMessage : BOOL;
+	bSendMessage_NotSubscribed: BOOL;
+	bRaiseAlarm : BOOL;
+	bConfirmAlarm : BOOL;
+	bClearAlarm: BOOL;
+
+	fbLogger : FB_TcEventLogger;
+	fbMessage : FB_TcMessage;
+	fbMessageArgs : FB_TcMessage;
+	fbAlarm : FB_TcAlarm;
+	bIsInitalized : BOOL;
+	
+	bSetJsonAttribute : BOOL;
+	sJsonAttribute : STRING := '{"key":"value"}';
+	
+	hr : HRESULT;
+	hrLastError : HRESULT;
+	
+	
+	fbSource : FB_TcSourceInfo;
+	bSendMessage_Win32ErrorClass: BOOL;
+	bClearLoggedEvents: BOOL;
+	bSendMessageWithArgs: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT bIsInitalized THEN
+	bIsInitalized := TRUE;
+	hr := fbAlarm.CreateEx(TC_EVENTS.PublisherEventClass.Alarm, TRUE, 0);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+	hr := fbMessage.CreateEx(TC_EVENTS.PublisherEventClass.Message, 0);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+	hr := fbMessageArgs.CreateEx(TC_EVENTS.PublisherEventClass.MessageWithArgs, 0);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+END_IF
+
+IF bSetJsonAttribute THEN
+	bSetJsonAttribute := FALSE;
+	hr := fbAlarm.SetJsonAttribute(sJsonAttribute);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+	hr := fbMessage.SetJsonAttribute(sJsonAttribute);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+END_IF
+
+IF bSendMessage THEN
+	bSendMessage := FALSE;
+	hr := fbMessage.Send(0);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+END_IF
+
+IF bSendMessageWithArgs THEN
+	bSendMessageWithArgs := FALSE;
+	//Using a String means to use a fixed String which cant be translated by a HMI. 
+	//If you want to have translated arguments you could make use of referenced events like shown here. They have their own translations available. 
+	fbMessageArgs.ipArguments.Clear().AddDInt(42).AddString('abc').AddEventReferenceEx(TC_EVENTS.PublisherEventClass.ReferencedEvent).AddString('AppendedArgument'); 
+	hr := fbMessageArgs.Send(0);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+END_IF
+
+IF bSendMessage_NotSubscribed THEN
+	bSendMessage_NotSubscribed := FALSE;
+	fbSource.sName := 'Not subscribed Event';
+	hr := fbLogger.SendMessageEx(TC_EVENTS.AnotherEventClass.NonSubscribedEvent, 0,0,0);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+END_IF
+
+IF bSendMessage_Win32ErrorClass THEN //use a TwinCAT provided Eventclass
+	bSendMessage_Win32ErrorClass := FALSE;
+	fbSource.sName := 'TwinCAT provided event';
+	hr := fbLogger.SendMessageEx(TC_EVENTS.Win32EventClass.ERROR_SUCCESS, 0,0,0);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+END_IF
+
+IF bRaiseAlarm THEN
+	bRaiseAlarm := FALSE;
+	hr := fbAlarm.Raise(0);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+END_IF
+
+IF bConfirmAlarm THEN
+	bConfirmAlarm := FALSE;
+	hr := fbAlarm.Confirm(0);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+END_IF
+
+IF bClearAlarm THEN
+	bClearAlarm := FALSE;
+	hr := fbAlarm.Clear(0, FALSE);
+	IF FAILED(hr) THEN
+		hrLastError := hr;
+	END_IF
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="108" Count="2" />
+      <LineId Id="185" Count="2" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="189" Count="1" />
+      <LineId Id="188" Count="0" />
+      <LineId Id="303" Count="2" />
+      <LineId Id="302" Count="0" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="82" Count="1" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="192" Count="1" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="195" Count="1" />
+      <LineId Id="194" Count="0" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="230" Count="6" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="306" Count="2" />
+      <LineId Id="318" Count="1" />
+      <LineId Id="316" Count="0" />
+      <LineId Id="309" Count="3" />
+      <LineId Id="237" Count="0" />
+      <LineId Id="313" Count="0" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="241" Count="0" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="198" Count="1" />
+      <LineId Id="197" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="264" Count="7" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="272" Count="0" />
+      <LineId Id="26" Count="1" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="201" Count="1" />
+      <LineId Id="200" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="30" Count="2" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="204" Count="1" />
+      <LineId Id="203" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="35" Count="2" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="207" Count="1" />
+      <LineId Id="206" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="300" Count="0" />
+      <LineId Id="39" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

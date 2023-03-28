@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.40">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{B01D11FA-E667-4416-9CCA-9C2FDCBA0D44}">TcComMessages</Name>
+			<DisplayName TxtId=""><![CDATA[TcComMessages]]></DisplayName>
+			<EventId>
+				<Name Id="1">EventloggerInitialized</Name>
+				<DisplayName TxtId=""><![CDATA[Eventlogger initialized]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">EventloggerDeinitialized</Name>
+				<DisplayName TxtId=""><![CDATA[Eventlogger deinitialized]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="3">SetObjStatePSDone</Name>
+				<DisplayName TxtId=""><![CDATA[SetObjStatePS Done]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="4">SetObjStateSODone</Name>
+				<DisplayName TxtId=""><![CDATA[SetObjStateSO Done]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="5">SetObjStateOSDone</Name>
+				<DisplayName TxtId=""><![CDATA[SetObjStateOS Done]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="6">SetObjStateSPDone</Name>
+				<DisplayName TxtId=""><![CDATA[SetObjStateSP Done]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="7">AddModuleToCallerDone</Name>
+				<DisplayName TxtId=""><![CDATA[AddModuleToCaller Done]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="8">RemoveModuleFromCallerDone</Name>
+				<DisplayName TxtId=""><![CDATA[RemoveModuleFromCaller Done]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{3B62C3F2-3A0F-4D1B-9279-D30DA59109DD}"/>
+				<Hide GUID="{A0CA11B7-9D19-4B3E-B187-0C858C4EAE8C}"/>
+			</Hides>
+		</DataType>
+	</DataTypes>
+	<Project ProjectGUID="{C511D6DA-66E9-44D2-9D59-3CE204634419}" Target64Bit="true" ShowHideConfigurations="#x306">
+		<System>
+			<Tasks>
+				<Task Id="2" Priority="1" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>Task</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Cpp>
+			<Project GUID="{228445DD-D67D-4633-A1EA-1FE03D4130D0}" Name="StartStopMsgs" PrjFilePath="StartStopMsgs\StartStopMsgs.vcxproj" TmcFilePath="StartStopMsgs\StartStopMsgs.tmc">
+				<Instance Id="#x01010010" KeepUnrestoredLinks="2" ClassFactoryId="C++ Module Vendor|StartStopMsgs|0.0.0.1">
+					<Name>StartStopMsgs_Obj1 (StartStopMsgsModule)</Name>
+					<TmcDesc GUID="{A06CF2D1-3600-4C82-A881-28B671FE0A69}">
+						<Name>StartStopMsgsModule</Name>
+						<CLSID ClassFactory="StartStopMsgs">{A06CF2D1-3600-4C82-A881-28B671FE0A69}</CLSID>
+						<Licenses>
+							<License>
+								<LicenseId>{304D006A-8299-4560-AB79-438534B50288}</LicenseId>
+							</License>
+						</Licenses>
+						<InitSequence>SO</InitSequence>
+						<Contexts>
+							<Context>
+								<Id>1</Id>
+								<ManualConfig>
+									<OTCID>#x02010020</OTCID>
+								</ManualConfig>
+								<Priority>1</Priority>
+								<CycleTime>10000000</CycleTime>
+							</Context>
+						</Contexts>
+						<Interfaces>
+							<Interface DisableCodeGeneration="true">
+								<Type GUID="{00000012-0000-0000-E000-000000000064}">ITComObject</Type>
+							</Interface>
+							<Interface>
+								<Type GUID="{03000010-0000-0000-E000-000000000064}">ITcCyclic</Type>
+							</Interface>
+							<Interface DisableCodeGeneration="true">
+								<Type GUID="{03000012-0000-0000-E000-000000000064}">ITcADI</Type>
+							</Interface>
+							<Interface DisableCodeGeneration="true">
+								<Type GUID="{03000018-0000-0000-E000-000000000064}">ITcWatchSource</Type>
+							</Interface>
+						</Interfaces>
+						<Parameters>
+							<Parameter HideParameter="true">
+								<Name>TraceLevelMax</Name>
+								<Comment><![CDATA[Controls the amount of log messages.]]></Comment>
+								<BitSize>32</BitSize>
+								<BaseType GUID="{8007AE3B-86BB-40F2-B385-EF87FCC239A4}">TcTraceLevel</BaseType>
+								<PTCID>#x03002103</PTCID>
+								<ContextId>1</ContextId>
+							</Parameter>
+							<Parameter>
+								<Name>Parameter</Name>
+								<BitSize>128</BitSize>
+								<SubItem>
+									<Name>data1</Name>
+									<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+									<BitSize>32</BitSize>
+									<BitOffs>0</BitOffs>
+								</SubItem>
+								<SubItem>
+									<Name>data2</Name>
+									<Type GUID="{18071995-0000-0000-0000-000000000008}">UDINT</Type>
+									<BitSize>32</BitSize>
+									<BitOffs>32</BitOffs>
+								</SubItem>
+								<SubItem>
+									<Name>data3</Name>
+									<Type GUID="{18071995-0000-0000-0000-00000000000E}">LREAL</Type>
+									<BitSize>64</BitSize>
+									<BitOffs>64</BitOffs>
+								</SubItem>
+								<PTCID>#x00000001</PTCID>
+								<ContextId>1</ContextId>
+							</Parameter>
+						</Parameters>
+						<DataAreas>
+							<DataArea>
+								<AreaNo AreaType="InputDst">0</AreaNo>
+								<Name>Inputs</Name>
+								<ContextId>1</ContextId>
+								<ByteSize>12</ByteSize>
+								<Symbol>
+									<Name>Value</Name>
+									<BitSize>32</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Status</Name>
+									<BitSize>32</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+									<BitOffs>32</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Data</Name>
+									<BitSize>32</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+									<BitOffs>64</BitOffs>
+								</Symbol>
+							</DataArea>
+							<DataArea>
+								<AreaNo AreaType="OutputSrc">1</AreaNo>
+								<Name>Outputs</Name>
+								<ContextId>1</ContextId>
+								<ByteSize>12</ByteSize>
+								<Symbol>
+									<Name>Value</Name>
+									<BitSize>32</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+									<BitOffs>0</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Control</Name>
+									<BitSize>32</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+									<BitOffs>32</BitOffs>
+								</Symbol>
+								<Symbol>
+									<Name>Data</Name>
+									<BitSize>32</BitSize>
+									<BaseType GUID="{18071995-0000-0000-0000-000000000008}">UDINT</BaseType>
+									<BitOffs>64</BitOffs>
+								</Symbol>
+							</DataArea>
+						</DataAreas>
+						<InterfacePointers>
+							<InterfacePointer>
+								<PTCID>#x03002060</PTCID>
+								<Name>CyclicCaller</Name>
+								<Type GUID="{0300001E-0000-0000-E000-000000000064}">ITcCyclicCaller</Type>
+							</InterfacePointer>
+						</InterfacePointers>
+						<EventClasses>
+							<EventClass>
+								<Type GUID="{B01D11FA-E667-4416-9CCA-9C2FDCBA0D44}">TcComMessages</Type>
+							</EventClass>
+						</EventClasses>
+						<ParameterValues>
+							<Value>
+								<Name>TraceLevelMax</Name>
+								<EnumText>tlAlways</EnumText>
+							</Value>
+							<Value>
+								<Name>Parameter.data1</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Parameter.data2</Name>
+								<Value>0</Value>
+							</Value>
+							<Value>
+								<Name>Parameter.data3</Name>
+								<Value>0</Value>
+							</Value>
+						</ParameterValues>
+						<InterfacePointerValues>
+							<Value>
+								<Name>CyclicCaller</Name>
+								<OTCID>#x02010020</OTCID>
+							</Value>
+						</InterfacePointerValues>
+					</TmcDesc>
+				</Instance>
+			</Project>
+		</Cpp>
+	</Project>
+</TcSmProject>

@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.40">
+	<Translations>
+		<Text TxtId="PublisherEventClass">
+			<Text LcId="1031"><![CDATA[Publisher Ereignisklasse]]></Text>
+		</Text>
+		<Text TxtId="Message">
+			<Text LcId="1031"><![CDATA[Nachricht]]></Text>
+		</Text>
+		<Text TxtId="Alarm">
+			<Text LcId="1031"><![CDATA[Alarm]]></Text>
+		</Text>
+		<Text TxtId="A small Demo of Arguments: number: {0} - String: {1} - an EventReference {2} - additional arguements are appended afterwards">
+			<Text LcId="1031"><![CDATA[Eine kleine demo von Argumenten: Zahl: {0} - String {1} - eine EventReferenz {2} - weitere Argumente werden angehangen am Ende]]></Text>
+		</Text>
+		<Text TxtId="ReferencedEvent">
+			<Text LcId="1031"><![CDATA[ReferenzierterEvent]]></Text>
+		</Text>
+	</Translations>
+	<DataTypes>
+		<DataType>
+			<Name GUID="{FFE66227-CA24-41B6-93F7-859EA4A3FC0A}" PersistentType="true">AnotherEventClass</Name>
+			<DisplayName TxtId=""><![CDATA[NewEventClass_DisplayText]]></DisplayName>
+			<EventId>
+				<Name Id="1">NonSubscribedEvent</Name>
+				<DisplayName TxtId=""><![CDATA[A Event which will not be subscribed to.]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+		</DataType>
+		<DataType>
+			<Name GUID="{E4B8BFA4-0295-4B62-AEC5-A93ACAEB32A8}" PersistentType="true">PublisherEventClass</Name>
+			<DisplayName TxtId=""><![CDATA[PublisherEventClass]]></DisplayName>
+			<EventId>
+				<Name Id="1">Message</Name>
+				<DisplayName TxtId=""><![CDATA[Message]]></DisplayName>
+				<Severity>Warning</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">Alarm</Name>
+				<DisplayName TxtId=""><![CDATA[Alarm]]></DisplayName>
+				<Severity>Critical</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="3">MessageWithArgs</Name>
+				<DisplayName TxtId=""><![CDATA[A small Demo of Arguments: number: {0} - String: {1} - an EventReference {2} - additional arguements are appended afterwards]]></DisplayName>
+				<Severity>Info</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="4">ReferencedEvent</Name>
+				<DisplayName TxtId=""><![CDATA[ReferencedEvent]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{3E9B2A7D-E1CC-4D59-92B2-07AF07074230}"/>
+				<Hide GUID="{B7A625D3-44A2-4DEB-8226-8837080C12C7}"/>
+				<Hide GUID="{B06FF484-B490-4CE4-9543-2FE64B656230}"/>
+			</Hides>
+		</DataType>
+	</DataTypes>
+	<Project SccProjectName="SAK" SccAuxPath="SAK" SccLocalPath="SAK" SccProvider="SAK" ProjectGUID="{8B66DE9D-6E65-43E1-B03C-7A0E1243E1A1}" Target64Bit="true" ShowHideConfigurations="#x106">
+		<System>
+			<Tasks>
+				<Task Id="2" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PublisherTask</Name>
+				</Task>
+				<Task Id="3" Priority="1" CycleTime="100000" AmsPort="351" AdtTasks="true">
+					<Name>ListenerTask</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{94AEA898-7881-4CAE-92F3-42E01F218C51}" Name="Publisher" PrjFilePath="Publisher\Publisher.plcproj" TmcFilePath="Publisher\Publisher.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x0002">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Publisher\Publisher.tmc" TmcHash="{300C175F-8EE0-E6D4-AFDA-7D8BC0DA81D6}">
+					<Name>Publisher Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PublisherTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010020</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+			<Project GUID="{FCB290FC-2BFF-4881-8C93-E77F6F4DE478}" Name="Listener" PrjFilePath="Listener\Listener.plcproj" TmcFilePath="Listener\Listener.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x0002" SymbolicMapping="true">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Listener\Listener.tmc" TmcHash="{F7182BA8-B6C0-915B-50F0-AD8B159B70CF}">
+					<Name>Listener Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>ListenerTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>1</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="1" OTCID="#x08502041"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+	</Project>
+</TcSmProject>

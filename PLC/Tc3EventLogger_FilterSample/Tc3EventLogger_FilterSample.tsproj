@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.12">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{54CC5482-AD79-4CDC-8C3E-B3983B36ED66}" PersistentType="true">TestFilterClass2</Name>
+			<DisplayName TxtId=""><![CDATA[TestFilterClass2 Description]]></DisplayName>
+			<EventId>
+				<Name Id="1">EventA</Name>
+				<DisplayName TxtId=""><![CDATA[EventA]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">EventB</Name>
+				<DisplayName TxtId=""><![CDATA[EventB]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{6C7CB954-D7D0-414E-95B4-31A9EC85C42E}"/>
+			</Hides>
+		</DataType>
+		<DataType>
+			<Name GUID="{695E2E22-3F74-4EC5-A795-E51962A66FCB}" PersistentType="true">TestFilterClass</Name>
+			<DisplayName TxtId=""><![CDATA[TestFilterClass Descripton]]></DisplayName>
+			<EventId>
+				<Name Id="1">Event1</Name>
+				<DisplayName TxtId=""><![CDATA[Event1]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">Event2</Name>
+				<DisplayName TxtId=""><![CDATA[Event2]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="3">Event3</Name>
+				<DisplayName TxtId=""><![CDATA[Event3]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="4">Event4</Name>
+				<DisplayName TxtId=""><![CDATA[Event4]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{83EB7F2E-3DAB-4DC5-B89D-ACDC48460D16}"/>
+				<Hide GUID="{FAF1CD0B-5E3F-4C03-98B9-D3B0D2B4F20F}"/>
+				<Hide GUID="{A865F643-5709-4891-9A89-A4CC7A73502D}"/>
+			</Hides>
+		</DataType>
+		<DataType>
+			<Name GUID="{79BBCF29-667E-4FC8-A494-90C1A7E736D6}" PersistentType="true">MessageTest</Name>
+			<DisplayName TxtId=""><![CDATA[MessageTest Description]]></DisplayName>
+			<EventId>
+				<Name Id="1">Message</Name>
+				<DisplayName TxtId=""><![CDATA[Message]]></DisplayName>
+				<Severity>Info</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">Alarm</Name>
+				<DisplayName TxtId=""><![CDATA[Alarm]]></DisplayName>
+				<Severity>Info</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{B0450D7F-B160-42D8-8112-04183BA417DD}"/>
+				<Hide GUID="{30B3D89D-90C7-4125-87E3-D8692C3C31CF}"/>
+				<Hide GUID="{01B07E18-4760-4B52-BEE7-A48DB4BD36EC}"/>
+				<Hide GUID="{42CF0CFC-124F-4E63-93FF-8A80D1641F59}"/>
+				<Hide GUID="{35F5DAAD-A8F9-4A76-9079-7468F7A9A787}"/>
+			</Hides>
+		</DataType>
+		<DataType>
+			<Name GUID="{FAF1CD0B-5E3F-4C03-98B9-D3B0D2B4F20F}" PersistentType="true">testFilterClass</Name>
+			<DisplayName TxtId=""><![CDATA[NewEventClass_DisplayText]]></DisplayName>
+			<EventId>
+				<Name Id="1">Event1</Name>
+				<DisplayName TxtId=""><![CDATA[Event_DisplayText1]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">testFilterClassEvent2</Name>
+				<DisplayName TxtId=""><![CDATA[testFilterClassEvent2_DisplayText]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="3">testFilterClassEvent3</Name>
+				<DisplayName TxtId=""><![CDATA[testFilterClassEvent3_DisplayText]]></DisplayName>
+				<Severity>Verbose</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{83EB7F2E-3DAB-4DC5-B89D-ACDC48460D16}"/>
+			</Hides>
+		</DataType>
+		<DataType>
+			<Name GUID="{42CF0CFC-124F-4E63-93FF-8A80D1641F59}" PersistentType="true">MessageTest</Name>
+			<DisplayName TxtId=""><![CDATA[NewEventClass_DisplayText]]></DisplayName>
+			<EventId>
+				<Name Id="1">Message</Name>
+				<DisplayName TxtId=""><![CDATA[Event_DisplayText]]></DisplayName>
+				<Severity>Info</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="2">Alarm</Name>
+				<DisplayName TxtId=""><![CDATA[MessageTestEvent2_DisplayText]]></DisplayName>
+				<Severity>Info</Severity>
+			</EventId>
+			<Hides>
+				<Hide GUID="{B0450D7F-B160-42D8-8112-04183BA417DD}"/>
+				<Hide GUID="{30B3D89D-90C7-4125-87E3-D8692C3C31CF}"/>
+				<Hide GUID="{01B07E18-4760-4B52-BEE7-A48DB4BD36EC}"/>
+			</Hides>
+		</DataType>
+	</DataTypes>
+	<Project ProjectGUID="{63AD6E49-4284-4313-BEEB-155B4F3D79AB}" TargetNetId="5.36.69.176.1.1" ShowHideConfigurations="#x386">
+		<System>
+			<Settings MaxCpus="4">
+				<Cpu CpuId="1"/>
+			</Settings>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+				<Task Id="4" Priority="1" CycleTime="100000" AmsPort="351" AdtTasks="true">
+					<Name>Task 4</Name>
+				</Task>
+				<Task Id="5" Priority="2" CycleTime="100000" AmsPort="301">
+					<Name>Task 5</Name>
+					<Vars VarGrpType="1" InsertType="1">
+						<Name>Inputs</Name>
+						<Var>
+							<Name>Var 8</Name>
+							<Type>UINT</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" InsertType="1">
+						<Name>Outputs</Name>
+					</Vars>
+					<Image Id="3" AddrType="1" ImageType="1" SizeIn="2">
+						<Name>Image</Name>
+					</Image>
+				</Task>
+			</Tasks>
+			<TypeSystem>
+				<AdditionalTmcFile Name="MyProjectTypes" File="MyProjectTypes.tmc"/>
+			</TypeSystem>
+		</System>
+		<Plc>
+			<Project GUID="{0780E51B-E94D-48EC-904C-6FA5B4BB6369}" Name="PLC_FilterSample" PrjFilePath="PLC_FilterSample\PLC_FilterSample.plcproj" TmcFilePath="PLC_FilterSample\PLC_FilterSample.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x0002" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC_FilterSample\PLC_FilterSample.tmc">
+					<Name>PLC_FilterSample Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+	</Project>
+</TcSmProject>

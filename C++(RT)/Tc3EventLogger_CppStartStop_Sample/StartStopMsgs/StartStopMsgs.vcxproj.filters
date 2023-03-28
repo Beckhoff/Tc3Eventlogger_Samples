@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{25426fe3-fd59-4bda-884a-eb50ae005dd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{877e8640-1182-48a1-a907-38f9f8c60cb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TwinCAT UM Files">
+      <UniqueIdentifier>{5581ccfe-d350-4098-81d6-a328d9270a31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TwinCAT RT Files">
+      <UniqueIdentifier>{e99abc5f-001e-4fac-bef5-9d57c182654d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TMC Files">
+      <UniqueIdentifier>{97de6bf4-9955-4826-b406-949840a0dde2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TwinCAT OS Files">
+      <UniqueIdentifier>{f9729528-095d-4c63-bc46-b2f7401acc1a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TcPch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartStopMsgsClassFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartStopMsgsInterfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartStopMsgsServices.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartStopMsgsCtrl.h">
+      <Filter>TwinCAT UM Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartStopMsgsDriver.h">
+      <Filter>TwinCAT RT Files</Filter>
+    </ClInclude>
+    <ClInclude Include="StartStopMsgsModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TcPch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartStopMsgsClassFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartStopMsgsCtrl.cpp">
+      <Filter>TwinCAT UM Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartStopMsgsW32.cpp">
+      <Filter>TwinCAT UM Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartStopMsgsDriver.cpp">
+      <Filter>TwinCAT RT Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartStopMsgsModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StartStopMsgsMain.cpp">
+      <Filter>TwinCAT OS Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="StartStopMsgs.rc">
+      <Filter>Source Files</Filter>
+    </ResourceCompile>
+    <ResourceCompile Include="StartStopMsgsW32.rc">
+      <Filter>TwinCAT UM Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="StartStopMsgsW32.def">
+      <Filter>TwinCAT UM Files</Filter>
+    </None>
+    <None Include="StartStopMsgs.tmc">
+      <Filter>TMC Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="StartStopMsgsW32.idl">
+      <Filter>TwinCAT UM Files</Filter>
+    </Midl>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,46 @@
+<TcEventSources SourceCount="2" EventCount="4" LinkCount="0">
+	<Source>
+		<GUID>{44444444-4444-4444-4444-444444444442}</GUID> 
+		<Id>1</Id>
+		<Name LcId="1031">Komponente 1</Name>
+		<Name LcId="1033">Component 1</Name>
+		<Event>
+			<Message LcId="1031">Komponente 1 Meldung 1</Message>
+			<Message LcId="1033">Component 1 Message 1</Message>
+			<Id>1</Id>
+			<Class>7</Class>
+			<Priority>0</Priority>
+			<ReqMustCon>1</ReqMustCon>
+		</Event>
+		<Event>
+			<Message LcId="1031">Komponente 1 Meldung 2</Message>
+			<Message LcId="1033">Component 1 Message 2</Message>
+			<Id>2</Id>
+			<Class>6</Class>
+			<Priority>0</Priority>
+			<ReqMustCon>0</ReqMustCon>
+		</Event>
+	</Source>
+	<Source>
+		<GUID>{44444444-4444-4444-4444-444444444443}</GUID> 
+		<Id>2</Id>
+		<Name LcId="1031">Komponente 2</Name>
+		<Name LcId="1033">Component 2</Name>
+		<Event>
+			<Message LcId="1031">Komponente 2 Meldung 1</Message>
+			<Message LcId="1033">Component 2 Message 1</Message>
+			<Id>1</Id>
+			<Class>2</Class>
+			<Priority>0</Priority>
+			<ReqMustCon>0</ReqMustCon>
+		</Event>
+		<Event>
+			<Message LcId="1031">Komponente 2 Meldung 2</Message>
+			<Message LcId="1033">Component 2 Message 2</Message>
+			<Id>2</Id>
+			<Class>6</Class>
+			<Priority>0</Priority>
+			<ReqMustCon>0</ReqMustCon>
+		</Event>
+	</Source>
+</TcEventSources>

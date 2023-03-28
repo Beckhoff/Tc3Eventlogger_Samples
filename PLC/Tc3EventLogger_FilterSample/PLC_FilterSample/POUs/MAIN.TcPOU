@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="MAIN" Id="{1a9db542-9bec-42d4-9816-77a1d1b3a8b4}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	hr: HRESULT;
+	
+	bSendEvents: BOOL;
+	fbEventLogger : FB_TcEventLogger;
+	fbAlarm : FB_TcAlarm; 
+	fbSrcInfo : FB_TcSourceInfo; 
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Sample_ListenerFilter(); 
+
+//send some events which are used in different filter scenarios 
+IF bSendEvents THEN 
+	bSendEvents := FALSE; 
+	//3 events from one EventClass
+	hr := fbEventLogger.SendMessage(TC_EVENTS.TestFilterClass.Event1.uuidEventClass, TC_EVENTS.TestFilterClass.Event1.nEventId, TC_EVENTS.TestFilterClass.Event1.eSeverity, 0,0,0);
+	hr := fbEventLogger.SendMessage(TC_EVENTS.TestFilterClass.Event2.uuidEventClass, TC_EVENTS.TestFilterClass.Event2.nEventId, TC_EVENTS.TestFilterClass.Event2.eSeverity, 0,0,0);
+	hr := fbEventLogger.SendMessage(TC_EVENTS.TestFilterClass.Event3.uuidEventClass, TC_EVENTS.TestFilterClass.Event3.nEventId, TC_EVENTS.TestFilterClass.Event3.eSeverity, 0,0,0);
+	//2 events from another EventClass
+	hr := fbEventLogger.SendMessage(TC_EVENTS.TestFilterClass2.EventA.uuidEventClass, TC_EVENTS.TestFilterClass2.EventA.nEventId, TC_EVENTS.TestFilterClass2.EventA.eSeverity, 0,0,0);
+	hr := fbEventLogger.SendMessage(TC_EVENTS.TestFilterClass2.EventB.uuidEventClass, TC_EVENTS.TestFilterClass2.EventB.nEventId, TC_EVENTS.TestFilterClass2.EventB.eSeverity, 0,0,0);
+	//1 alarm from a 3rd EventClass. Toggle Raise <-> Clear
+	fbSrcInfo.sName := 'My Source'; 	
+	hr := fbAlarm.Create(TC_EVENTS.MessageTest.Alarm.uuidEventClass, TC_EVENTS.MessageTest.Alarm.nEventId, TC_EVENTS.MessageTest.Alarm.eSeverity, FALSE, fbSrcInfo); 
+	hr := fbAlarm.Raise(0);
+	//1 message from this EventClass 	
+	hr := fbEventLogger.SendMessage(TC_EVENTS.MessageTest.Message.uuidEventClass, TC_EVENTS.MessageTest.Message.nEventId, TC_EVENTS.MessageTest.Message.eSeverity, 0,0,0);
+END_IF
+
+Sample_ClearLoggedEvents();
+
+Sample_ExportFilter();
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="597" Count="15" />
+      <LineId Id="614" Count="3" />
+      <LineId Id="624" Count="1" />
+      <LineId Id="635" Count="1" />
+      <LineId Id="151" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

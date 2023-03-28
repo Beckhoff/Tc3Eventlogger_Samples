@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="FB_SampleListener" Id="{43be9d72-438a-4d98-a57c-1dab8a4900a2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_SampleListener EXTENDS FB_ListenerBase2
+
+VAR
+	nMessages: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="OnMessageSent" Id="{1bf4b1ee-e547-4983-aa69-aa4bcbe697c8}">
+      <Declaration><![CDATA[METHOD OnMessageSent : HRESULT
+VAR_INPUT
+	fbEvent : REFERENCE TO FB_TcEvent; 
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[nMessages := nMessages + 1;
+ ]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="FB_SampleListener">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+    <LineIds Name="FB_SampleListener.OnMessageSent">
+      <LineId Id="5" Count="0" />
+      <LineId Id="10" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

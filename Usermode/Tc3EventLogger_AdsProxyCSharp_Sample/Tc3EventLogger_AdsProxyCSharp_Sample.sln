@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tc3EventLogger_AdsProxyCSharp_Sample", "Tc3EventLogger_AdsProxyCSharp_Sample.csproj", "{15540549-363C-4BF4-8F8A-2E932B5EBE75}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15540549-363C-4BF4-8F8A-2E932B5EBE75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15540549-363C-4BF4-8F8A-2E932B5EBE75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15540549-363C-4BF4-8F8A-2E932B5EBE75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15540549-363C-4BF4-8F8A-2E932B5EBE75}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1E9D6828-F78B-43B0-9D1F-733AAE4F0441}
+	EndGlobalSection
+EndGlobal

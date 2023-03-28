@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.6">
+  <POU Name="Sample_ClearLoggedEvents" Id="{cb1304c8-8d9b-407a-9550-8239f86f5024}" SpecialFunc="None">
+    <Declaration><![CDATA[// sample about how to clear filtered logged events
+PROGRAM Sample_ClearLoggedEvents
+VAR
+	hr : HRESULT;
+	
+	bClear					: BOOL;
+	fbClearFilter			: FB_TcEventFilter;
+	fbClearLoggedEvents		: FB_TcClearLoggedEventsSettings;
+	
+	fbEventLogger	: FB_TcEventLogger;
+	fbTrig			: R_TRIG;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//this deletes all events with 'TestFilterClass2' eventclass from database (2 per raise on bSendEvents)
+fbTrig(CLK:=bClear);
+IF bClear THEN
+	IF fbTrig.Q THEN
+		fbClearFilter.Clear().IsMessage().AND_OP().EventClass.EqualTo(TC_EVENTS.TestFilterClass2.EventA.uuidEventClass); 
+		fbClearLoggedEvents.AddFilter(fbClearFilter);
+ 	END_IF
+	IF fbEventLogger.ClearLoggedEvents(fbClearLoggedEvents, hrErrorCode=>hr) THEN // async request returns TRUE if not any more busy
+		bClear := FALSE;
+	END_IF
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="Sample_ClearLoggedEvents">
+      <LineId Id="26" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="19" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
