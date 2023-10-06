@@ -25,9 +25,7 @@ IF bExport THEN
 		fbCsvExportSetting.AddFilter(fbExportFilter); 
 		fbExportFilter.Clear().IsMessage().AND_OP().EventClass.EqualTo(TC_EVENTS.MessageTest.Message.uuidEventClass);
 	END_IF
-	IF fbEventLogger.ExportLoggedEvents(sExportFileName, fbCsvExportSetting, hrErrorCode=>hr) THEN // async request returns TRUE if not any more busy 
-		bExport := FALSE;
-	END_IF
+	bExport := NOT fbEventLogger.ExportLoggedEvents(sExportFileName, fbCsvExportSetting, hrErrorCode=>hr);// async request returns TRUE if not any more busy 
 END_IF
 ]]></ST>
     </Implementation>
@@ -38,7 +36,7 @@ END_IF
       <LineId Id="26" Count="0" />
       <LineId Id="8" Count="3" />
       <LineId Id="27" Count="0" />
-      <LineId Id="12" Count="2" />
+      <LineId Id="46" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="15" Count="0" />
     </LineIds>
