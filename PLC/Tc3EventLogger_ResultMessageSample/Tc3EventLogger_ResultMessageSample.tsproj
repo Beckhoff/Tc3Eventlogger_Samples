@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.20">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{3F512417-E951-4B52-B0C9-A8C99F683FB9}" PersistentType="true">CalculationEventClass</Name>
+			<DisplayName TxtId=""><![CDATA[CalculationEventClass]]></DisplayName>
+			<EventId>
+				<Name Id="1">DivisionByZero</Name>
+				<DisplayName TxtId=""><![CDATA[Division by zero.]]></DisplayName>
+				<Severity>Error</Severity>
+			</EventId>
+		</DataType>
+	</DataTypes>
 	<Project SccProjectName="SAK" SccAuxPath="SAK" SccLocalPath="SAK" SccProvider="SAK" ProjectGUID="{AB92FE3E-E06E-42FD-80E3-0BCCAE0C9826}" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Tasks>
